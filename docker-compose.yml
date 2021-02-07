@@ -6,11 +6,13 @@ services:
     build: ./
     volumes:
       - ./:/usr/src/app
-    command: npm start
+      - /usr/src/app/node_modules
     working_dir: /usr/src/app
+    command: npm start
     ports:
-      - "3000:3000"
+      - "4000:4000"
     environment:
+      NODE_ENV: development
       POSTGRES_URI: postgres://admin:password@postgres:5432/auth
       REDIS_URI: redis://redis:6379
 

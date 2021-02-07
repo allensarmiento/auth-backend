@@ -1,13 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const knex = require('knex');
 const morgan = require('morgan');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/auth', authRoutes);
 
 const port = 4000;
 app.listen(port, () => {
