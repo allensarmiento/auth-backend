@@ -1,8 +1,9 @@
 const knex = require('knex');
+const { PostgresURI } = require('./config');
 
 const db = knex({
   client: 'pg',
-  connection: process.env.POSTGRES_URI,
+  connection: PostgresURI,
 });
 
 module.exports = db;
