@@ -12,7 +12,7 @@ const signup = (req, res) => {
 
   const hash = bcrypt.hashSync(password, 10);
 
-  db.transaction((trx) => {
+  return db.transaction((trx) => {
     trx('login')
       .returning('email')
       .insert({ hashed_password: hash, email })
