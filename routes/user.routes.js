@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.use(authMiddleware.requireAuth);
 
-router.route('/:id')
+router.route('/')
   .get(userCtrl.getUser);
 
 module.exports = router;

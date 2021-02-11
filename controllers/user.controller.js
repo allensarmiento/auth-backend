@@ -3,7 +3,6 @@ const redisClient = require('../redisClient');
 
 const getUser = (req, res) => {
   const { authorization } = req.headers;
-  const { id } = req.params;
 
   if (authorization) {
     const token = authorization.split(' ')[1];
@@ -15,7 +14,7 @@ const getUser = (req, res) => {
 
       return db.from('users')
         .select('*')
-        .where({ id })
+        .where({ id: reply })
         .then((data) => {
           if (data) {
             data.hashed_password = undefined;
