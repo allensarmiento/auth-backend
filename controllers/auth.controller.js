@@ -14,12 +14,14 @@ const signup = (req, res) => {
 
   return db.transaction((trx) => {
     trx('login')
-      .returning('email')
+      .returning(['id', 'email'])
       .insert({ hashed_password: hash, email })
-      .then((userEmail) => {
+      .then((data) => {
+        const { id, email } = data[0];
+
         return trx('users')
           .returning('*')
-          .insert({ name, email: userEmail[0], created: new Date() })
+          .insert({ id, name, email, created: new Date() })
           .then((user) => {
             res.json(user[0]);
           });
